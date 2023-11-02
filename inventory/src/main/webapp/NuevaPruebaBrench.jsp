@@ -9,5 +9,6 @@
 <body>
 	<p>PRUEBA DE BRENCH-COLABORADOR</p>
 	<h1>NUEVA PRUEBA</h1>
+	<H2>NUEVO PRUEBO </H2>
 </body>
 </html>
