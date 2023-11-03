@@ -384,7 +384,7 @@ public class ExistenciasDAO implements CRUDExistencias {
 	            if (fechaUltimaTransaccion != null) {
 	                LocalDate fechaUltimaTransaccionLocalDate = fechaUltimaTransaccion.toLocalDate();
 	                long diferenciaDias = ChronoUnit.DAYS.between(fechaUltimaTransaccionLocalDate, fechaActual);
-	                ProveedorInfo proveedorInfo = new ProveedorInfo(idProveedor, nombreProveedor, diferenciaDias);
+	                ProveedorInfo proveedorInfo = new ProveedorInfo(idProveedor, nombreProveedor, diferenciaDias,fechaUltimaTransaccion);
 	                diferenciaDiasYNombreProveedores.put(idProveedor, proveedorInfo);
 	            }
 	        }
