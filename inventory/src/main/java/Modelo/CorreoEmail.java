@@ -37,10 +37,10 @@ public class CorreoEmail {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("Luuis21e@gmail.com")); // Cambia esto al correo del remitente
+            message.setFrom(new InternetAddress("Luuis21e@gmail.com")); 
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(destinatario)  // Correo del destinatario (usuario registrado)
+                    InternetAddress.parse(destinatario)
             );
             message.setSubject("Confirmación de Registro en Mi Sitio Web");
             message.setText("Hola " + nombreUsuario + ",\n\n" +
