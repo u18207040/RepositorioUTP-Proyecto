@@ -15,6 +15,7 @@ import Conexion.Conexion;
 import ModeloDAO.ExistenciasDAO;
 import ModeloDAO.UsuarioDAO;
 import Modelo.CorreoEmail;
+import Modelo.CorreoEmailUser;
 import Modelo.ProveedorInfo;
 import Modelo.Usuario;
 
@@ -88,20 +89,26 @@ public class Controlador extends HttpServlet {
 		            conexionDB.actualizarUltimaConexion(user);
 		            conexionDB.actualizarUltimaHoraConexion(user);
 		            //Date fecha = dax.obtenerFechaUltimaTransaccionProveedor();
+		            
+		            
 		            Map<Integer, ProveedorInfo> proveedoresInfo = dax.obtenerDiferenciaDiasYNombreProveedores();
-
+		            StringBuilder mensajeProveedores = new StringBuilder();
 		            for (Map.Entry<Integer, ProveedorInfo> entry : proveedoresInfo.entrySet()) {
 		                int proveedorId = entry.getKey();
 		                ProveedorInfo proveedorInfo = entry.getValue();
+		                
 
 		                if (proveedorInfo.getDiferenciaDias() >= 2) {
-		                    System.out.println("Proveedor ID: " + proveedorId);
-		                    System.out.println("Nombre del Proveedor: " + proveedorInfo.getNombre());
-		                    System.out.println("Diferencia de días para el proveedor ID " + proveedorId + ": " + proveedorInfo.getDiferenciaDias());
+		                	mensajeProveedores.append("Proveedor ID: ").append(proveedorId).append("\n");
+		                    mensajeProveedores.append("Nombre del Proveedor: ").append(proveedorInfo.getNombre()).append("\n");
+		                    mensajeProveedores.append("Ultima fecha de actividad: ").append(proveedorInfo.getFecha()).append("\n");
+		                    mensajeProveedores.append("Dias inactivos: ").append(proveedorInfo.getDiferenciaDias()).append("\n\n");
+		                    
 		                }
 		            }
-
-
+		            
+		            
+		            CorreoEmail.enviarCorreoConfirmacion(u.getEmail(), u.getNom(),  mensajeProveedores.toString());
 		            request.getRequestDispatcher("Fronter.jsp").forward(request, response);
 		        }
 		    } else {
@@ -159,10 +166,10 @@ public class Controlador extends HttpServlet {
 		    Usuario usuario = dao.obtenerUsuarioPorId(usuarioId);
 		    if (usuario != null) {
 		        // Envía el correo utilizando los detalles del usuario
-		        CorreoEmail correo = new CorreoEmail();
+		        CorreoEmailUser correo = new CorreoEmailUser();
 		        correo.enviarCorreoConfirmacion(usuario.getEmail(), usuario.getUser(), usuario.getDni(), usuario.getEstado());
 		        response.sendRedirect(request.getContextPath() + "/Usuario.jsp");
-	            //CorreoEmail.enviarCorreoConfirmacion(correo, nom, user, cargo);
+	           // CorreoEmail.enviarCorreoConfirmacion(correo, nom, user, cargo);
 	            return;
 		    }
 		    // Redirige o realiza cualquier otra acción necesaria después de enviar el correo.

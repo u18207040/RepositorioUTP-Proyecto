@@ -1,16 +1,21 @@
 package Modelo;
 
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class CorreoEmail {
-	public static void enviarCorreoConfirmacion(String destinatario, String nombreUsuario, String proveedoresInfo) {
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
+
+public class CorreoEmailUser {
+	public static void enviarCorreoConfirmacion(String destinatario, String nombreUsuario, String dni, String cargo) {
         Properties prop = new Properties();
-        try (InputStream input = CorreoEmail.class.getClassLoader().getResourceAsStream("../resources/config.properties")) {
+        try (InputStream input = CorreoEmailUser.class.getClassLoader().getResourceAsStream("../resources/config.properties")) {
             if (input == null) {
                 System.out.println("No se pudo encontrar config.properties");
                 return;
@@ -42,11 +47,15 @@ public class CorreoEmail {
                     Message.RecipientType.TO,
                     InternetAddress.parse(destinatario)
             );
-            message.setSubject("Tiempo de inactividad de Proveedores");
+            message.setSubject("Confirmación de Registro en Mi Sitio Web");
             message.setText("Hola " + nombreUsuario + ",\n\n" +
-                    "Datos de Proveedores inactivos:\n\n" +   
-                    "Información de proveedores:\n" + proveedoresInfo + "\n\n" +
-            		"¡Bienvenido y disfruta de nuestro sitio!");
+                    "Cuenta registrada al sitio web de la Empresa. Tu Cuenta ha sido creada con exito.\n\n" +
+                    "Tus datos de registro:\n" +
+                    "Nombre de usuario: " + nombreUsuario + "\n" +
+                    "Nombre de Password: " + dni + "\n" +
+                    "Nombre de Cargo: " + cargo + "\n" +
+                    "Correo electrónico: " + destinatario + "\n\n" +   
+            		"¡Bienvenido al Sistema: Taller Acabados Angelito!");
 
             Transport.send(message);
 

@@ -33,6 +33,7 @@ public class UsuarioDAO implements CRUD {
                 u.setNom(rs.getString("Nombres"));
                 u.setEstado(rs.getString("Estado"));
                 u.setPermisos(rs.getString("permisos"));
+                u.setEmail(rs.getString("email"));
             }
         } catch (Exception e) {
             e.printStackTrace();
