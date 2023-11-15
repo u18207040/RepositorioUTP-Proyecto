@@ -154,6 +154,9 @@
                         </form>
                     </div>
                     <div class="table-responsive">
+                <form action="ControladorReporte" method="get">
+       				<button class="btn btn-outline-dark lk" type="submit">Generar Informe <i class="fa-regular fa-file-pdf"></i></button>
+    			</form>
                 <table class="table table-sm table-striped table-bordered table-hover mb-5">
                     <thead class="table-success">
                         <tr>

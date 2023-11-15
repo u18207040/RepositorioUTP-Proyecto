@@ -39,4 +39,14 @@
     <servlet-name>ControladorGestionMaterial</servlet-name>
     <url-pattern>/ControladorGestionMaterial</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControladorReporte</display-name>
+    <servlet-name>ControladorReporte</servlet-name>
+    <servlet-class>Controlador.ControladorReporte</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorReporte</servlet-name>
+    <url-pattern>/ControladorReporte</url-pattern>
+  </servlet-mapping>
 </web-app>
