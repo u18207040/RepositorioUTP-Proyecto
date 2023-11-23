@@ -85,13 +85,14 @@ public class Controlador extends HttpServlet {
 		            session.setAttribute("usuario", u.getNom());
 		            session.setAttribute("user", u.getUser());
 		            session.setAttribute("userId", u.getId());
+		            session.setAttribute("email", u.getEmail());
 		            conexionDB.actualizarEnLineaUsuario(user, 1);
 		            conexionDB.actualizarUltimaConexion(user);
 		            conexionDB.actualizarUltimaHoraConexion(user);
 		            //Date fecha = dax.obtenerFechaUltimaTransaccionProveedor();
 		            
-		            
-		            Map<Integer, ProveedorInfo> proveedoresInfo = dax.obtenerDiferenciaDiasYNombreProveedores();
+		            //AQUI CORREO
+		          /* Map<Integer, ProveedorInfo> proveedoresInfo = dax.obtenerDiferenciaDiasYNombreProveedores();
 		            StringBuilder mensajeProveedores = new StringBuilder();
 		            for (Map.Entry<Integer, ProveedorInfo> entry : proveedoresInfo.entrySet()) {
 		                int proveedorId = entry.getKey();
@@ -105,10 +106,10 @@ public class Controlador extends HttpServlet {
 		                    mensajeProveedores.append("Dias inactivos: ").append(proveedorInfo.getDiferenciaDias()).append("\n\n");
 		                    
 		                }
-		            }
+		            }*/
 		            
 		            
-		            CorreoEmail.enviarCorreoConfirmacion(u.getEmail(), u.getNom(),  mensajeProveedores.toString());
+		            //CorreoEmail.enviarCorreoConfirmacion(u.getEmail(), u.getNom(),  mensajeProveedores.toString());
 		            request.getRequestDispatcher("Fronter.jsp").forward(request, response);
 		        }
 		    } else {
@@ -162,7 +163,6 @@ public class Controlador extends HttpServlet {
 
 		} else if (action.equalsIgnoreCase("enviarCorreo")) {
 		    int usuarioId = Integer.parseInt(request.getParameter("usuarioId"));
-		    // Recupera los detalles del usuario con el ID proporcionado
 		    Usuario usuario = dao.obtenerUsuarioPorId(usuarioId);
 		    if (usuario != null) {
 		        // Envía el correo utilizando los detalles del usuario
@@ -172,7 +172,7 @@ public class Controlador extends HttpServlet {
 	           // CorreoEmail.enviarCorreoConfirmacion(correo, nom, user, cargo);
 	            return;
 		    }
-		    // Redirige o realiza cualquier otra acción necesaria después de enviar el correo.
+		   
 		}
 	}
 

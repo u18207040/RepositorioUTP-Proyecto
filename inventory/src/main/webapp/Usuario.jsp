@@ -121,7 +121,12 @@
 						
 					</form>
 				</div>
+				
 				<div class="table-responsive">
+				<form action="ControladorReporte" method="get">
+    				<input type="hidden" name="tipoInforme" value="usuario">
+    				<button class="btn btn-outline-dark lk my-2" type="submit">Generar Informe Usuario <i class="fa-regular fa-file-pdf"></i></button>
+				</form>
 				<table class="table table-sm table-striped table-bordered table-hover mb-5 ">
 					<thead class="table-success">
 						<tr>

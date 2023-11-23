@@ -49,4 +49,14 @@
     <servlet-name>ControladorReporte</servlet-name>
     <url-pattern>/ControladorReporte</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ControladorPOI</display-name>
+    <servlet-name>ControladorPOI</servlet-name>
+    <servlet-class>Controlador.ControladorPOI</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ControladorPOI</servlet-name>
+    <url-pattern>/ControladorPOI</url-pattern>
+  </servlet-mapping>
 </web-app>

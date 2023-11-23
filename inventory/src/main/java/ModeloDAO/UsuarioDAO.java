@@ -3,9 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import Conexion.Conexion;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import Interface.CRUD;
 import Modelo.Movimientos;
@@ -253,7 +255,7 @@ public class UsuarioDAO implements CRUD {
 	    try {
 	        con = cn.getConnection();
 	        ps = con.prepareStatement(sql);
-	        ps.setInt(1, id);  // Establecemos el ID del usuario que estamos buscando
+	        ps.setInt(1, id);
 	        rs = ps.executeQuery();
 	        if (rs.next()) {
 	            usuario = new Usuario();
@@ -272,6 +274,41 @@ public class UsuarioDAO implements CRUD {
 	    }
 	    return usuario;
 	}
+    public String obtenerProximoNumeroReporte(String tipoReporte) {
+        String nuevoNumeroReporte = null;
+        String sql = "SELECT MAX(id_contador) AS max_id FROM reportes where tipo_reporte= ?";
+        String insertSql = "INSERT INTO reportes (id_contador, numero_reporte, tipo_reporte) VALUES (?, ?, ?)";
+
+        try  {
+        	con = cn.getConnection();
+	        ps = con.prepareStatement(sql); 
+	        ps.setString(1, tipoReporte);
+	        rs = ps.executeQuery();
+	        PreparedStatement insertPs = con.prepareStatement(insertSql);
+            
+            int maxId; 
+            if (rs.next()) {
+                maxId = rs.getInt("max_id") + 1;
+            } else {
+                maxId = 1;
+            }
+
+            nuevoNumeroReporte = tipoReporte.substring(0, 2).toUpperCase() + "-" +String.format("%03d", maxId);
+            insertPs.setInt(1, maxId);
+            insertPs.setString(2, nuevoNumeroReporte);
+            insertPs.setString(3, tipoReporte);
+
+            insertPs.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } 
+
+        return nuevoNumeroReporte;
+    }
+
+
+
 	
 
 }

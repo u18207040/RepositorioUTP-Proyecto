@@ -153,10 +153,15 @@
                         <button type="submit" class="btn btn-outline-success lk" name="accion" value="BuscarExistencia"><i class="fa-solid fa-magnifying-glass mx-1"></i>Buscar</button>
                         </form>
                     </div>
-                    <div class="table-responsive">
-                <form action="ControladorReporte" method="get">
-       				<button class="btn btn-outline-dark lk" type="submit">Generar Informe <i class="fa-regular fa-file-pdf"></i></button>
-    			</form>
+                <div class="table-responsive">
+				<form action="ControladorReporte" method="get">
+    				<input type="hidden" name="tipoInforme" value="existencias">
+    				<button class="btn btn-outline-dark lk my-2" type="submit">Generar Informe Existencias <i class="fa-regular fa-file-pdf"></i></button>
+				</form>
+				<form action="ControladorReporte" method="POST">
+    				<input type="hidden" name="accion" value="enviarCorreoInactivo">
+    				<button class="btn btn-outline-dark lk" type="submit">Enviar Clientes Inactivos <i class="fa-solid fa-envelope"></i></button>
+				</form>
                 <table class="table table-sm table-striped table-bordered table-hover mb-5">
                     <thead class="table-success">
                         <tr>
