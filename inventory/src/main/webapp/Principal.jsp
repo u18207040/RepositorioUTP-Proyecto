@@ -95,8 +95,7 @@ html, body {
 					<li class="nav-item"><a
 						style="margin-left: 50px; border: none"
 						class="btn btn-outline-info"
-						href="Controlador?menu=Usuario&accion=usuario">Gestión de
-							Usuarios</a></li>
+						href="Controlador?menu=Usuario&accion=usuario">Usuarios</a></li>
 					<%
                         }
                         %>

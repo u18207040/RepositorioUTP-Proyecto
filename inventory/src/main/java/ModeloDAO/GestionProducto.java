@@ -35,7 +35,7 @@ public class GestionProducto implements CRUDProducto{
                 list.add(pro);
                 
                 
-                System.out.println("BIEN AGREGADO");
+               // System.out.println("BIEN AGREGADO");
             }
 
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class GestionProducto implements CRUDProducto{
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
-            System.out.println("BIEN AGREGADO");
+           // System.out.println("BIEN AGREGADO");
         } catch (Exception e) {
             e.printStackTrace();
         }

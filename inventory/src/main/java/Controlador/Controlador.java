@@ -16,7 +16,7 @@ import ModeloDAO.ExistenciasDAO;
 import ModeloDAO.UsuarioDAO;
 import Modelo.CorreoEmail;
 import Modelo.CorreoEmailUser;
-import Modelo.ProveedorInfo;
+import Modelo.CliienteInfo;
 import Modelo.Usuario;
 
 public class Controlador extends HttpServlet {
@@ -89,6 +89,7 @@ public class Controlador extends HttpServlet {
 		            conexionDB.actualizarEnLineaUsuario(user, 1);
 		            conexionDB.actualizarUltimaConexion(user);
 		            conexionDB.actualizarUltimaHoraConexion(user);
+		            conexionDB.incrementarIngresosUsuario(user);
 		            //Date fecha = dax.obtenerFechaUltimaTransaccionProveedor();
 		            
 		            //AQUI CORREO
@@ -167,7 +168,11 @@ public class Controlador extends HttpServlet {
 		    if (usuario != null) {
 		        // Envía el correo utilizando los detalles del usuario
 		        CorreoEmailUser correo = new CorreoEmailUser();
-		        correo.enviarCorreoConfirmacion(usuario.getEmail(), usuario.getUser(), usuario.getDni(), usuario.getEstado());
+		        Thread correoThread = new Thread(() -> {
+		        	correo.enviarCorreoConfirmacion(usuario.getEmail(), usuario.getUser(), usuario.getDni(), usuario.getEstado());
+	            });
+	            correoThread.start();
+		        
 		        response.sendRedirect(request.getContextPath() + "/Usuario.jsp");
 	           // CorreoEmail.enviarCorreoConfirmacion(correo, nom, user, cargo);
 	            return;

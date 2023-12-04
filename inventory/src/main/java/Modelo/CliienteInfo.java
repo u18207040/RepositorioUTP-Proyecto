@@ -2,13 +2,13 @@ package Modelo;
 
 import java.sql.Date;
 
-public class ProveedorInfo {
+public class CliienteInfo {
 	private int id;
     private String nombre;
     private long diferenciaDias;
     private Date fecha;
 
-    public ProveedorInfo(int id, String nombre, long diferenciaDias, Date fecha) {
+    public CliienteInfo(int id, String nombre, long diferenciaDias, Date fecha) {
         this.id = id;
         this.nombre = nombre;
         this.diferenciaDias = diferenciaDias;

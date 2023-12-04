@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Existencia de Materiales</title>
 <link rel="stylesheet" href="css/miestilo.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         
@@ -110,22 +110,22 @@
                          <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Existencia Inicial:</label>
+                                    <label>E. Inicial:</label>
                                     <input class="form-control form-control-sm" type="number" placeholder="0" id="inicial" name="txtInicial">
                                     <span id="inicialError" class="error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Existencia Final:</label>
+                                    <label>E. Final:</label>
                                     <input class="form-control form-control-sm" type="number" placeholder="0" id="final" name="txtFinal">
                                     <span id="finalError" class="error"></span>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Precio compra:</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="S/." id="precio" name="txtPrecio">
+                                    <label>P. compra:</label>
+                                    <input class="form-control form-control-sm" type="text" placeholder="S/. Precio" id="precio" name="txtPrecio">
                                     <span id="precioError" class="error"></span>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 <br>
                                 <div>
                                     <!--<input class="btn btn-outline-info" type="submit" name="accion" value="AgregarExistencia" id="btnAgregar">-->
-                                    <button type="submit" class="btn btn-outline-info lk" name="accion" id="btnAgregar" value="AgregarExistencia">Guardar datos<i class="fa-solid fa-database mx-2"></i></button>
+                                    <button type="submit" class="btn btn-outline-info lk" name="accion" id="btnAgregar" value="AgregarExistencia">Guardar<i class="fa-solid fa-database mx-2"></i></button>
                                 </div>
                             </div>
                         </div>           
@@ -158,10 +158,7 @@
     				<input type="hidden" name="tipoInforme" value="existencias">
     				<button class="btn btn-outline-dark lk my-2" type="submit">Generar Informe Existencias <i class="fa-regular fa-file-pdf"></i></button>
 				</form>
-				<form action="ControladorReporte" method="POST">
-    				<input type="hidden" name="accion" value="enviarCorreoInactivo">
-    				<button class="btn btn-outline-dark lk" type="submit">Enviar Clientes Inactivos <i class="fa-solid fa-envelope"></i></button>
-				</form>
+				
                 <table class="table table-sm table-striped table-bordered table-hover mb-5">
                     <thead class="table-success">
                         <tr>

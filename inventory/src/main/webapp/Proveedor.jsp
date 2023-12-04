@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Proveedores</title>
 <link rel="stylesheet" href="css/miestilo.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://kit.fontawesome.com/65c558f159.js" crossorigin="anonymous"></script>

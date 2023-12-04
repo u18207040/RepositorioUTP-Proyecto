@@ -37,20 +37,20 @@ public class CorreoEmail {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("Luuis21e@gmail.com")); 
+            message.setFrom(new InternetAddress("ProyectosTA21@gmail.com")); 
             message.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse(destinatario)
             );
-            message.setSubject("Tiempo de inactividad de Proveedores");
+            message.setSubject("Tiempo de inactividad de Clientes");
             message.setText("Hola " + nombreUsuario + ",\n\n" +
-                    "Datos de Proveedores inactivos:\n\n" +   
-                    "Información de proveedores:\n" + proveedoresInfo + "\n\n" +
+                    "Datos de Clientes inactivos:\n\n" +   
+                    "Información de clientes:\n" + proveedoresInfo + "\n\n" +
             		"¡Bienvenido y disfruta de nuestro sitio!");
 
             Transport.send(message);
 
-            System.out.println("Correo de confirmación enviado a " + destinatario);
+            System.out.println("Correo d e confirmación enviado a " + destinatario);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

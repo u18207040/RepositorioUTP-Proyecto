@@ -3,6 +3,7 @@ package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Conexion {
@@ -113,4 +114,67 @@ public class Conexion {
 
 			return actualizado;
 		}
+		public void incrementarIngresosUsuario(String usuario) {
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+
+	        try {
+	            connection = getConnection();
+
+	            int ingresosActuales = obtenerIngresosUsuario(usuario);
+	            int nuevosIngresos = ingresosActuales + 1;
+
+	            String sql = "UPDATE empleado SET cantidad_ingresos = ? WHERE User = ?";
+	            statement = connection.prepareStatement(sql);
+	            statement.setInt(1, nuevosIngresos);
+	            statement.setString(2, usuario);
+	            statement.executeUpdate();
+	        } catch (SQLException e) {
+	        e.printStackTrace();
+	        
+	        }finally {
+				try {
+					if (statement != null) {
+						statement.close();
+
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} 
+	    }
+
+	    private int obtenerIngresosUsuario(String usuario) {
+	        Connection connection = null;
+	        PreparedStatement statement = null;
+	        ResultSet resultSet = null;
+
+	    try {
+	        connection = getConnection();
+
+	        String sql = "SELECT cantidad_ingresos FROM empleado WHERE User = ?";
+	        statement = connection.prepareStatement(sql);
+	        statement.setString(1, usuario);
+	        resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {
+	            return resultSet.getInt("cantidad_ingresos");
+	        } else {
+	            return 0;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return 0;
+	        
+	    } finally {
+			try {
+				if (statement != null) {
+					statement.close();
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	 }
 }

@@ -47,7 +47,7 @@ public class CorreoEmailUser {
                     Message.RecipientType.TO,
                     InternetAddress.parse(destinatario)
             );
-            message.setSubject("Confirmación de Registro en Mi Sitio Web");
+            message.setSubject("Datos de mi Cuenta: Sitio Web - Taller Angelito");
             message.setText("Hola " + nombreUsuario + ",\n\n" +
                     "Cuenta registrada al sitio web de la Empresa. Tu Cuenta ha sido creada con exito.\n\n" +
                     "Tus datos de registro:\n" +

@@ -15,7 +15,7 @@ import java.util.Map;
 import Conexion.Conexion;
 import Interface.CRUDExistencias;
 import Modelo.Existencia;
-import Modelo.ProveedorInfo;
+import Modelo.CliienteInfo;
 
 public class ExistenciasDAO implements CRUDExistencias {
 	Conexion cn=new Conexion();
@@ -362,14 +362,14 @@ public class ExistenciasDAO implements CRUDExistencias {
 	    return fechaUltimaTransaccion;
 	}
 
-	public Map<Integer, ProveedorInfo> obtenerDiferenciaDiasYNombreProveedores() {
+	public Map<Integer, CliienteInfo> obtenerDiferenciaDiasYNombreClientes() {
 	    LocalDate fechaActual = LocalDate.now();
-	    Map<Integer, ProveedorInfo> diferenciaDiasYNombreProveedores = new HashMap<>();
+	    Map<Integer, CliienteInfo> diferenciaDiasYNombreClientes = new HashMap<>();
 	    
-	    String sql = "SELECT p.id_proveedor AS id_proveedor, p.nombre AS nombre_proveedor, MAX(im.fecha_entrada) AS fecha_ultima_transaccion " +
-	                 "FROM inventario_material im " +
-	                 "INNER JOIN proveedores p ON im.id_proveedor = p.id_proveedor " +
-	                 "GROUP BY im.id_proveedor";
+	    String sql = "SELECT c.id_cliente AS cliente, c.nombre AS nombre_cliente, MAX(im.fecha_entrada) AS fecha_ultima_transaccion " +
+	                 "FROM inventario_productos im " +
+	                 "INNER JOIN cliente c ON im.id_cliente = c.id_cliente " +
+	                 "GROUP BY im.id_cliente";
 	    
 	    try {
 	        con = cn.getConnection();
@@ -377,15 +377,15 @@ public class ExistenciasDAO implements CRUDExistencias {
 	        rs = ps.executeQuery();
 
 	        while (rs.next()) {
-	            int idProveedor = rs.getInt("id_proveedor");
-	            String nombreProveedor = rs.getString("nombre_proveedor");
+	            int idCliente = rs.getInt("cliente");
+	            String nombreCliente = rs.getString("nombre_cliente");
 	            Date fechaUltimaTransaccion = rs.getDate("fecha_ultima_transaccion");
 	            
 	            if (fechaUltimaTransaccion != null) {
 	                LocalDate fechaUltimaTransaccionLocalDate = fechaUltimaTransaccion.toLocalDate();
 	                long diferenciaDias = ChronoUnit.DAYS.between(fechaUltimaTransaccionLocalDate, fechaActual);
-	                ProveedorInfo proveedorInfo = new ProveedorInfo(idProveedor, nombreProveedor, diferenciaDias,fechaUltimaTransaccion);
-	                diferenciaDiasYNombreProveedores.put(idProveedor, proveedorInfo);
+	                CliienteInfo ClienteInfo = new CliienteInfo(idCliente, nombreCliente, diferenciaDias,fechaUltimaTransaccion);
+	                diferenciaDiasYNombreClientes.put(idCliente, ClienteInfo);
 	            }
 	        }
 	    } catch (SQLException e) {
@@ -393,7 +393,7 @@ public class ExistenciasDAO implements CRUDExistencias {
 	       
 	    }
 	    
-	    return diferenciaDiasYNombreProveedores;
+	    return diferenciaDiasYNombreClientes;
 	}
 
 

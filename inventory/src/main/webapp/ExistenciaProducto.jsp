@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Existencia de Productos</title>
 <link rel="stylesheet" href="css/miestilo.css">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://kit.fontawesome.com/65c558f159.js" crossorigin="anonymous"></script>
@@ -124,8 +124,8 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Precio de servicio:</label>
-                                    <input class="form-control form-control-sm" type="text" placeholder="S/." id="precio" name="txtPrecio">
+                                    <label>P. Servicio:</label>
+                                    <input class="form-control form-control-sm" type="text" placeholder="S/.Precio" id="precio" name="txtPrecio">
                                     <span id="precioError" class="error"></span>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                 <br>
                                 <div>
                                     <!--<input class="btn btn-outline-info" type="submit" name="accion" value="AgregarExistencia" id="btnAgregar">-->
-                                    <button type="submit" class="btn btn-outline-info lk" name="accion" id="btnAgregar" value="AgregarExistenciaProducto">Guardar datos<i class="fa-solid fa-database mx-2"></i></button>
+                                    <button type="submit" class="btn btn-outline-info lk" name="accion" id="btnAgregar" value="AgregarExistenciaProducto">Guardar<i class="fa-solid fa-database mx-2"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,30 @@
                         </form>
                     </div>
                     <div class="table-responsive">
-                <table class="table table-sm table-striped table-bordered table-hover my-5">
+                 <form action="ControladorReporte" method="get">
+    				<input type="hidden" name="tipoInforme" value="producto">
+    				<button class="btn btn-outline-dark lk mb-2" type="submit">Generar Informe Producto <i class="fa-regular fa-file-pdf"></i></button>
+				</form>
+				<%
+                    
+                       if (rolUsuario != null && rolUsuario.equalsIgnoreCase("administrador")) {
+                %>
+				<form id="formularioCorreo" action="ControladorReporte" method="POST">
+    				<input type="hidden" name="accion" value="enviarCorreoInactivo">
+    				<button class="btn btn-outline-dark lk" type="submit" onclick="confirmarEnvio()">Enviar Clientes Inactivos <i class="fa-solid fa-envelope"></i></button>
+				</form>
+					<script>
+						function confirmarEnvio() {
+							var confirmacion = confirm("¿Estás seguro de que deseas enviar el correo?");
+							if (confirmacion) {
+								document.getElementById("formularioCorreo").submit();
+							}
+						}
+					</script>
+					<%
+                       }			
+				%>
+                <table class="table table-sm table-striped table-bordered table-hover my-3">
                     <thead class="table-success">
                         <tr>
                             <th class="text-center">ID</th>

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Gestion de Usuarios</title>
 <link rel="stylesheet" href="css/miestilo.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://kit.fontawesome.com/65c558f159.js" crossorigin="anonymous"></script>
@@ -104,7 +104,7 @@
 							<br>
 							<div>
 							<!--<input class="btn btn-outline-success" type="submit" name="accion" value="AgregarProveedor" id="btnAgregar"><br>-->
-							<button type="submit" class="btn btn-outline-info lk" name="accion" value="AgregarUsuario" id="btnAgregar">Guardar datos<i class="fa-solid fa-database mx-2"></i></button>
+							<button type="submit" class="btn btn-outline-info lk" name="accion" value="AgregarUsuario" id="btnAgregar">Guardar<i class="fa-solid fa-database mx-2"></i></button>
 							
 							</div>
 						</div>
@@ -123,10 +123,7 @@
 				</div>
 				
 				<div class="table-responsive">
-				<form action="ControladorReporte" method="get">
-    				<input type="hidden" name="tipoInforme" value="usuario">
-    				<button class="btn btn-outline-dark lk my-2" type="submit">Generar Informe Usuario <i class="fa-regular fa-file-pdf"></i></button>
-				</form>
+				
 				<table class="table table-sm table-striped table-bordered table-hover mb-5 ">
 					<thead class="table-success">
 						<tr>
@@ -179,24 +176,29 @@
 								<td class="text-center">${usuario.ultimoAcceso}</td>
 								<td class="text-center">${usuario.horaUltimoAcceso}</td>
 								<td class="text-center">
-										<div class="d-flex justify-content-center">
-											<a href="#exampleModal${usuario.id}" class="btn btn-outline-dark" data-bs-toggle="modal" style="text-decoration: none; border: none"> 
-												<i class="fa-solid fa-pen-to-square"></i>
-											</a> 
-											
-											<button class="mx-1 btn btn-outline-danger confirm-delete-empleado" data-id="${usuario.id}" style="text-decoration: none; border: none">
+									<div class="d-flex justify-content-center">
+										<a href="#exampleModal${usuario.id}" class="btn btn-outline-dark" data-bs-toggle="modal" style="text-decoration: none; border: none"> 
+											<i class="fa-solid fa-pen-to-square"></i>
+										</a> 	
+										<button class="mx-1 btn btn-outline-danger confirm-delete-empleado" data-id="${usuario.id}" style="text-decoration: none; border: none">
 										<i class="fa-solid fa-trash-can"></i>
-									</button>
-											
-
-											<form method="post" action="Controlador">
-												<input type="hidden" name="accion" value="enviarCorreo">
-												<input type="hidden" name="usuarioId" value="${usuario.id}">
-												<button class="btn btn-outline-warning" type="submit" style="text-decoration: none; border: none;">
-													<i class="fa-solid fa-envelope"></i>
-												</button>
-											</form>
-										</div>
+										</button>
+										<form id="formularioxCorreo" method="post" action="Controlador">
+											<input type="hidden" name="accion" value="enviarCorreo">
+											<input type="hidden" name="usuarioId" value="${usuario.id}">
+											<button class="btn btn-outline-warning" type="submit" onclick="confirmarEnviox()" style="text-decoration: none; border: none;">
+												<i class="fa-solid fa-envelope"></i>
+											</button>
+										</form>
+										<script>
+											function confirmarEnviox() {
+											var confirmacion = confirm("¿Estás seguro de que deseas enviar el correo?");
+											if (confirmacion) {
+											document.getElementById("formularioCorreox").submit();
+												}
+											}
+										</script>
+									</div>
 								</td>
 								</tr>
 							<div class="modal fade" id="exampleModal${usuario.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

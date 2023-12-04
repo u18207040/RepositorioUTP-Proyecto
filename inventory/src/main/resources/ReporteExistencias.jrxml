@@ -422,7 +422,7 @@ ORDER BY id_inventario ASC]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="257" splitType="Stretch">
+		<band height="348" splitType="Stretch">
 			<staticText>
 				<reportElement isPrintRepeatedValues="false" x="146" y="20" width="281" height="21" isRemoveLineWhenBlank="true" uuid="45ee5d51-0e4b-4da9-bded-517b8005e0e6">
 					<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
@@ -432,23 +432,22 @@ ORDER BY id_inventario ASC]]>
 				</textElement>
 				<text><![CDATA[Grafico: Reporte de Existencias]]></text>
 			</staticText>
-			<barChart>
+			<xyBarChart>
 				<chart evaluationTime="Report">
-					<reportElement isPrintRepeatedValues="false" x="31" y="50" width="493" height="200" isRemoveLineWhenBlank="true" isPrintWhenDetailOverflows="true" uuid="41b83cfa-cb8a-43aa-a072-a181b842a2db">
+					<reportElement isPrintRepeatedValues="false" x="60" y="60" width="430" height="288" isRemoveLineWhenBlank="true" uuid="710fd694-e4d4-44d2-b244-d193527dc738">
 						<printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
 					</reportElement>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
 				</chart>
-				<categoryDataset>
-					<categorySeries>
+				<xyDataset>
+					<xySeries autoSort="true">
 						<seriesExpression><![CDATA[$F{nombreMaterial}]]></seriesExpression>
-						<categoryExpression><![CDATA[$F{nombreProveedor}]]></categoryExpression>
-						<valueExpression><![CDATA[$F{existencia_final}]]></valueExpression>
-						<labelExpression><![CDATA[$F{nombreProveedor}]]></labelExpression>
-					</categorySeries>
-				</categoryDataset>
+						<xValueExpression><![CDATA[$F{existencia_final}]]></xValueExpression>
+						<yValueExpression><![CDATA[$F{precio_compra}]]></yValueExpression>
+					</xySeries>
+				</xyDataset>
 				<barPlot>
 					<plot/>
 					<itemLabel/>
@@ -459,7 +458,7 @@ ORDER BY id_inventario ASC]]>
 						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
 					</valueAxisFormat>
 				</barPlot>
-			</barChart>
+			</xyBarChart>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -583,7 +582,7 @@ ORDER BY id_inventario ASC]]>
 				<textFieldExpression><![CDATA[$F{nombreMaterial}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Table_TH" isPrintRepeatedValues="false" x="150" y="0" width="100" height="29" uuid="4706a330-3bc5-4323-8ec5-00256812971d">
+				<reportElement style="Table_TH" x="150" y="0" width="100" height="29" uuid="4706a330-3bc5-4323-8ec5-00256812971d">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<box>
@@ -599,7 +598,7 @@ ORDER BY id_inventario ASC]]>
 				<textFieldExpression><![CDATA[String.format("%d u", $F{existencia_final})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Table_TH" isPrintRepeatedValues="false" x="250" y="0" width="100" height="29" uuid="b7adeb1f-3e65-4880-b446-6b783b4c5464"/>
+				<reportElement style="Table_TH" x="250" y="0" width="100" height="29" uuid="b7adeb1f-3e65-4880-b446-6b783b4c5464"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
@@ -613,7 +612,7 @@ ORDER BY id_inventario ASC]]>
 				<textFieldExpression><![CDATA[String.format("S/. %.2f", $F{precio_compra})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Table_TH" isPrintRepeatedValues="false" x="350" y="0" width="100" height="29" uuid="e5b17c77-717f-4db0-aebd-29377f166fb2"/>
+				<reportElement style="Table_TH" x="350" y="0" width="100" height="29" uuid="e5b17c77-717f-4db0-aebd-29377f166fb2"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 					<topPen lineWidth="1.0" lineStyle="Dashed" lineColor="#000000"/>
